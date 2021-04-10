@@ -1,4 +1,4 @@
-export DISPLAY=127.0.0.1:0.0
+#export DISPLAY=127.0.0.1:0.0
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -61,7 +61,7 @@ if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]-> \[\033[01;34m\]\w\[\033[00m\] \[\033[00m\]'
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]-> \[\033[01;34m\]\w\[\033[00m\] \[\033[00m\]'
     #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
@@ -96,8 +96,14 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias c='clear'
-alias v='nvim'
+alias nv='nvim'
 alias r='ranger'
+alias ne='neofetch'
+alias lg='lazygit'
+alias smi='sudo make clean install'
+alias ss='wd'
+alias env='nv ~/.config/nvim/init.vim'
+alias lc='lc3sim'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -123,12 +129,14 @@ if ! shopt -oq posix; then
   fi
 fi
 export EDITOR=/usr/bin/nvim
+export PATH=$PATH:/home/zzx/.local/bin
+export RANGER_LOAD_DEFAULT_RC=FALSE
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 ranger(){
   if [ -z "$RANGER_LEVEL" ]; then
-    /usr/local/bin/ranger "$@"
+    /bin/ranger "$@"
   else
     exit
   fi
