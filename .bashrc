@@ -101,7 +101,7 @@ alias r='ranger'
 alias ne='neofetch'
 alias lg='lazygit'
 alias smi='sudo make clean install'
-alias ss='wd'
+alias sfl='sudo fdisk -l'
 alias env='nv ~/.config/nvim/init.vim'
 alias lc='lc3sim'
 
@@ -141,3 +141,4 @@ ranger(){
     exit
   fi
 }
+export PATH="/home/zzx/bin:$PATH"
