@@ -11,7 +11,6 @@ redshift -P -O 5750
 #done &
 feh --bg-fill ~/Pictures/wallpapers/mysteriousForest.jpg
 exec dbus-launch ~/dwm/scripts/startdwm
-fcitx5 &   #使用fcitx中文输入法
 #else
 #  exec $command
 #fi

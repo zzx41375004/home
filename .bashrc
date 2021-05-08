@@ -142,3 +142,5 @@ ranger(){
   fi
 }
 export PATH="/home/zzx/bin:$PATH"
+
+sudo mount -a
