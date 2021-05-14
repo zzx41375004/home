@@ -11,6 +11,7 @@ redshift -P -O 5750
 #done &
 feh --bg-fill ~/Pictures/wallpapers/mysteriousForest.jpg
 exec dbus-launch ~/dwm/scripts/startdwm
+#exec startxfce4
 #else
 #  exec $command
 #fi
