@@ -97,13 +97,13 @@ alias l='ls -CF'
 
 alias c='clear'
 alias nv='nvim'
-alias r='ranger'
 alias ne='neofetch'
 alias lg='lazygit'
 alias smi='sudo make clean install'
 alias sfl='sudo fdisk -l'
 alias env='nv ~/.config/nvim/init.vim'
 alias lc='lc3sim'
+alias bm='bashmount'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -134,13 +134,25 @@ export RANGER_LOAD_DEFAULT_RC=FALSE
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-ranger(){
+r(){
   if [ -z "$RANGER_LEVEL" ]; then
     /bin/ranger "$@"
   else
     exit
   fi
 }
-export PATH="/home/zzx/bin:$PATH"
 
-sudo mount -a
+ranger_cd() {
+    temp_file="$(mktemp -t "ranger_cd.XXXXXXXXXX")"
+    ranger --choosedir="$temp_file" -- "${@:-$PWD}"
+    if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
+        cd -- "$chosen_dir"
+    fi
+    rm -f -- "$temp_file"
+}
+
+# This binds Ctrl-O to ranger-cd:
+# bind '"\C-o":"ranger-cd\C-m"'
+
+# sudo umount /mnt/* > /dev/null 2>&1 &
+# sudo mount -a
