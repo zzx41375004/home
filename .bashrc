@@ -96,7 +96,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias c='clear'
-alias nv='nvim'
+alias e='nvim'
 alias ne='neofetch'
 alias lg='lazygit'
 alias smi='sudo make clean install'
@@ -129,17 +129,30 @@ if ! shopt -oq posix; then
   fi
 fi
 export EDITOR=/usr/bin/nvim
+# export EDITOR=nvim
 export PATH=$PATH:/home/zzx/.local/bin
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-r(){
-  if [ -z "$RANGER_LEVEL" ]; then
-    /bin/ranger "$@"
-  else
-    exit
-  fi
+# f(){
+#   if [ -z "$RANGER_LEVEL" ]; then
+#     /bin/ranger "$@"
+#   else
+#     exit > /dev/null 2>&1
+#   fi
+# }
+
+f()
+{
+    if [ -f ~/.config/vifm/lastdir ]; then
+        rm ~/.config/vifm/lastdir
+    fi
+    # "command" prevents recursive call
+    command vifmrun "$@"
+    if [ -f ~/.config/vifm/lastdir ]; then
+        cd `cat ~/.config/vifm/lastdir`
+    fi
 }
 
 ranger_cd() {
